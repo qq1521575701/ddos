@@ -1,5 +1,6 @@
 - [测量墙](https://www.vedbex.com/dstat)
 
+- [在线ping](https://www.itdog.cn/tcping/)
 ### 📦 克隆项目
     git clone https://github.com/qq1521575701/ddos.git
 
