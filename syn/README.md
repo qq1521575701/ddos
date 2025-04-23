@@ -1,3 +1,6 @@
+### 目录
+    cd ddos/syn
+
 ### 编译
     gcc syn.c -o syn -pthread
 
