@@ -1,5 +1,5 @@
 ### 测量墙
-- L4_L7墙 [bootstrap](https://www.vedbex.com/dstat)).
+- [测量墙](https://www.vedbex.com/dstat)).
 
 ### 📦 克隆项目
     git clone https://github.com/qq1521575701/ddos.git
