@@ -11,7 +11,7 @@ with open('cn_ip_part.txt','r',encoding='utf-8') as file:
 networks = random.sample(networks, 3000)
 
 
-with open('cn_ip.txt','w',encoding='utf-8') as file:
+with open('cn_syn_ip.txt','w',encoding='utf-8') as file:
     # 遍历每个网络段
     for network in networks:
         a = 0
