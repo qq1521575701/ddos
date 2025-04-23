@@ -1,8 +1,5 @@
-### 测量墙
-<a href="https://www.vedbex.com/dstat" target="_blank">测量墙</a>
-<a href="https://www.vedbex.com/dstat" target="_blank" rel="noopener noreferrer">测量墙</a>
+- [测量墙](https://www.vedbex.com/dstat)
 
-- <a href="https://www.vedbex.com/dstat" target="_blank" rel="noopener noreferrer">测量墙</a>
 ### 📦 克隆项目
     git clone https://github.com/qq1521575701/ddos.git
 
