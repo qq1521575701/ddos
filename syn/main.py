@@ -11,7 +11,6 @@ networks = random.sample(networks, 3000)
 with open('cn_syn_ip.txt', 'w', encoding='utf-8') as file:
     for network in networks:
         count = 0
-        # 使用迭代器而不是 list()，节省内存、加快速度
         for ip in network.hosts():
             file.write(f'{ip} {random.randint(20000, 65535)}\n')
             count += 1
