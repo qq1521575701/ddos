@@ -1,5 +1,9 @@
+### 目录
+    cd ddos/hping3
+
+
 ### 自动化安装hping3
-    sudo python3.8 ddos/hping3/hping3.py
+    sudo python3.8 hping3.py
 
 ### 参数
 - -S SYN 标志。
