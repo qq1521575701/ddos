@@ -5,7 +5,7 @@
     gcc syn.c -o syn -pthread
 
 ### 生成源ip
-    python3.8 main.py && shuf cn_syn_ip.txt
+    python3.8 main.py && shuf cn_syn_ip.txt -o cn_syn_ip.txt
 
 
 ### 攻击
