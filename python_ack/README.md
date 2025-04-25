@@ -2,4 +2,4 @@
     cd ddos/python_ack
 
 ### 生成随机中国ip
-    python3.8 main.py && shuf cn_syn_ip.txt -o cn_syn_ip.txt
+    python3.8 main.py && shuf cn_ack_ip.txt -o cn_ack_ip.txt
