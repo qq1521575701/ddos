@@ -6,7 +6,7 @@ with open('cn_ip_part.txt', 'r', encoding='utf-8') as file:
     networks = [ipaddress.IPv4Network(line.strip()) for line in file]
 
 # 随机抽取 3000 个 IP 段
-networks = random.sample(networks, 3000)
+networks = random.sample(networks, 1000)
 
 with open('cn_syn_ip.txt', 'w', encoding='utf-8') as file:
     for network in networks:
