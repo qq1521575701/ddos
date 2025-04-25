@@ -14,5 +14,5 @@ with open('cn_syn_ip.txt', 'w', encoding='utf-8') as file:
         for ip in network.hosts():
             file.write(f'{ip} {random.randint(20000, 65535)}\n')
             count += 1
-            if count == 5000:
+            if count == 1000:
                 break
