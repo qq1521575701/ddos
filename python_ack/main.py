@@ -8,7 +8,7 @@ with open('cn_ip_part.txt', 'r', encoding='utf-8') as file:
 # 随机抽取 3000 个 IP 段
 networks = random.sample(networks, 1000)
 
-with open('cn_syn_ip.txt', 'w', encoding='utf-8') as file:
+with open('cn_ack_ip.txt', 'w', encoding='utf-8') as file:
     for network in networks:
         count = 0
         for ip in network.hosts():
