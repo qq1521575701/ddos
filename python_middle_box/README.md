@@ -5,7 +5,7 @@
 
 
 ### 目录
-    ddos/python_middle_box
+    cd ddos/python_middle_box
 
 ### 安装
     apt install tcpdump -y
