@@ -1,4 +1,4 @@
-#介绍
+# 介绍
 - 发送一个包 ack模式
 - 发送数据包需要宁外一个服务器接受包
 - python3.8 send_packet.py src_ip src_port file_path
