@@ -7,3 +7,7 @@
 - packet.txt 初始目录 约4000mbp/s
 
 - 反射文件 为 ip:port
+
+
+### 扫描
+        gcc tcpscan.c -o tcpscan && ./tcpscan src_ip src_port packet.txt
