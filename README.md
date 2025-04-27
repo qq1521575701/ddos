@@ -1,6 +1,8 @@
 - [测量墙](https://www.vedbex.com/dstat)
 
 - [在线ping](https://www.itdog.cn/tcping/)
+
+- [AMP-Research](https://github.com/Phenomite/AMP-Research)
 ### 📦 克隆项目
     git clone https://github.com/qq1521575701/ddos.git
 
