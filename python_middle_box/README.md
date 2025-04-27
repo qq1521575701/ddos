@@ -21,3 +21,10 @@
 
 ### 📌 还原原状（测试完后一定要清除）：
     sudo iptables -D OUTPUT -p tcp --tcp-flags RST RST -j DROP
+
+
+
+
+### 测试
+-     sudo timedatectl set-timezone Asia/Shanghai
+-     tcpdump -nn 'tcp src port 80 and src host not 38.180.188.158 and dst portrange 40000-50000' -q 
