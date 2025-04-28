@@ -22,4 +22,7 @@
 
 
 ### 宁外一台服务器抓包
-        tcpdump -t -nn tcp src port 80 and dst port 8000 and 'tcp[((tcp[12:1] & 0xf0) >> 2):4] != 0' -q
+        nohup tcpdump -t -nn tcp src port 80 and dst port 8000 and 'tcp[((tcp[12:1] & 0xf0) >> 2):4] != 0' -q > tcp.txt &
+
+### 查看
+        tail -f tcp.txt
