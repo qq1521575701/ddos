@@ -14,7 +14,7 @@
     sudo iptables -A OUTPUT -p tcp --tcp-flags RST RST -j DROP
 
 ### 抓包
-    nohup tcpdump -nn 'tcp and dst port 25256 and len > 100' -q > tcpdump.txt &
+    nohup tcpdump -nn 'dst portrange 20000-30000 and src port 80 and src host not 220.158.232.216 and tcp[tcpflags] & tcp-rst == 0' -q -t > tcpdump1.txt &
 
 ### 分析
     python3.8 main.py
